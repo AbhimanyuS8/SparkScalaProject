@@ -14,7 +14,8 @@ object clickStreamingLog extends App {
     .option("host","ec2-52-66-243-42.ap-south-1.compute.amazonaws.com")
     .option("port", 9999)
     .load()
-  setupLogging()  // setting log info
+  setupLogging()
+  // setting log info
 
 import spark.implicits._
   val words = lines.as[String].flatMap(_.split(" "))
