@@ -1,0 +1,5 @@
+package simpleScala
+
+object Learning {
+
+}
