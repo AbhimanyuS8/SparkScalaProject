@@ -1,3 +1,4 @@
+/*
 package simpleScala.playground
 
 class Fraction(n:Int,d:Int) {
@@ -66,3 +67,4 @@ object Operation extends App{
 
 
 }
+*/

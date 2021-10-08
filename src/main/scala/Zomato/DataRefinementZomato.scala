@@ -4,7 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import common._
 
 import common.FileToDF._
-class DataRefinementZomato(spark:SparkSession,path:String) extends Node[DataFrame] {
+class DataRefinementZomato(implicit spark:SparkSession,path:String) extends Node[DataFrame] {
 
   override def execute: DataFrame = {
 

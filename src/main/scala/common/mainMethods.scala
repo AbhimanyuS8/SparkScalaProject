@@ -10,4 +10,6 @@ trait mainMethods extends App {
     Logger.getRootLogger.setLevel(level)
   }
 
+  implicit val s:SparkSession= SparkSession.builder().appName("Implicitly Created").master("local[*]").getOrCreate()
+
 }

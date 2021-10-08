@@ -1,5 +1,14 @@
 package simpleScala.playground
+/*
+Contains the following concept---
+private member in class
+this keyword
+operator method
+method overloading
+implicit conversion- Converting the receiver ex- intToRational
 
+
+ */
 class Fraction(n: Int, d: Int) {
 
 
@@ -29,6 +38,20 @@ class Fraction(n: Int, d: Int) {
     new Fraction(numer * that.numer, denom * that.denom)
   def div(that: Fraction): Fraction =
     new Fraction(numer * that.denom, denom * that.numer)
+  def +(that: Fraction): Fraction =
+    new Fraction(numer * that.denom + that.numer * denom,
+      denom * that.denom)
+  def +(that:Int):Fraction= new Fraction(numer*1 + denom*that,denom)
+  def -(that: Fraction): Fraction =
+    new Fraction(numer * that.denom - that.numer * denom,
+      denom * that.denom)
+  def -(that:Int):Fraction= new Fraction(numer*1 + denom*that,denom)
+  def *(that: Fraction): Fraction =
+    new Fraction(numer * that.numer, denom * that.denom)
+  def *(that:Int):Fraction= new Fraction(numer*that,denom)
+  def /(that: Fraction): Fraction =
+    new Fraction(numer * that.denom, denom * that.numer)
+  def /(that:Int):Fraction= new Fraction(numer*1 , denom*that)
   def isLessThan(that:Fraction)= this.numer * that.denom < this.denom*that.numer
 //  println("The Fraction before normalisation is: " +n +"/"+d)
 
@@ -36,7 +59,9 @@ class Fraction(n: Int, d: Int) {
     if (isLessThan(that)) that
     else this
   }
-  println("The Fraction after normalisation is: " +numer +"/"+denom)
+
+  override def toString: String = numer+"/"+denom
+//  println("The Fraction after normalisation is: " +numer +"/"+denom)
 }
 
 
@@ -47,7 +72,21 @@ object Operation extends App {
 //  var res=x.mul(y)
 println(x isLessThan  y)
   println(x.max(y).numer + "/" +x.max(y).denom)
+println("x+y= "+ x.+(y))
+  println("x+y= "+ (x + y))
+  println("x+y= "+ (x-y))
+  println("x-y " + x.-(y))
+  println(" x add y : " + x.add(y))
+  //println("x-y= "+ x-y)
+  println("x*y= "+ x*y)
+  println("x/y= "+ x/y)
 
+  println("Method overload y * 2 = "+ y * 2) // Here y has method * that accepts Int as an argument
+  /* But println("Method overload 2 * y = "+ 2 * y)  will not work bcs 2 doesnot have a method *
+  In order to work the above we need to define an implicit conversion from Int to Fraction:
+*/
+  implicit def intToRational(x: Int) = new Fraction(x, 1)
+  println("Implicit comnversion of Int type to fraction Type: 2 * y = "+ (2 * y))
  // println(res.numer + "/" + res.denom)
 
 //  val aux=new Fraction(3)
