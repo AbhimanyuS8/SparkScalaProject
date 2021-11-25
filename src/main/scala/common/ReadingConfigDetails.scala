@@ -3,7 +3,6 @@ package common
 import java.io.File
 
 import com.typesafe.config.ConfigFactory
-import common.DbConfig.{applicationConf, getClass}
 import org.apache.log4j.Logger
 
 

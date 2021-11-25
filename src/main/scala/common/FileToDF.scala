@@ -1,18 +1,18 @@
 package common
 
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.DataFrame
 
 object FileToDF extends mainMethods {
 
-  def fileReader(filetype: String,path:String) = {
+  def fileReader(filetype: String, path: String) = {
     filetype match {
 
-      case "xlsx"  => xlsxfile(path)
-      case _ =>   other(filetype,path)
+      case "xlsx" => xlsxfile(path)
+      case _ => other(filetype, path)
     }
   }
 
-  def xlsxfile(path:String):DataFrame = {
+  def xlsxfile(path: String): DataFrame = {
     spark.read.format("com.crealytics.spark.excel")
       .option("useHeader", "true")
       .option("location", path)
@@ -21,8 +21,9 @@ object FileToDF extends mainMethods {
       .option("addColorColumns", "false")
       .load(path)
   }
-  def other(filetype:String,path:String)={
-    spark.read.format(filetype).option("Header","True")
+
+  def other(filetype: String, path: String) = {
+    spark.read.format(filetype).option("Header", "True")
       .load(path)
   }
 }
