@@ -65,7 +65,7 @@ class Fraction(n: Int, d: Int) {
 }
 
 
-object Operation extends App {
+object FractionOperation extends App {
   val x=new Fraction(3,5)
   val y= new Fraction(5,9)
   val z=new Fraction(6,15)
