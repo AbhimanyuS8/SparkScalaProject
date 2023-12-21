@@ -21,11 +21,25 @@ import spark.implicits._
   data.createOrReplaceTempView("data_t")
 
   val a= spark.sql("Select start_time,dt_time, dt_time + INTERVAL 2 minutes as dt  from data_t")
-  data.printSchema()
+/*  data.printSchema()
   data.show()
   a.printSchema()
-  a.show()
+  a.show()*/
 
+  val empData=Seq(("Ram","Ayodhya","10"),("Shyam","Vrindavan","12"),("Krishna","Mathura",null),("Jaganath","Puri",null))
+
+  val empDF= empData.toDF("name","address","age")
+val colLst= empDF.columns
+ val rsDF= colLst.foldLeft(empDF)((acc,colmn)=>(acc.withColumn(colmn,when(col(colmn).isNull,lit("NULL"))
+   .otherwise(col(colmn)))))
+  val jsnDF=empDF.withColumn("value",struct($"*"))
+    .withColumn("JsonValue",to_json(struct($"*")))
+      .withColumn("value2",to_json(struct("name",colLst.filterNot(c=> c =="name"):_*)))
+
+  empDF.show()
+  jsnDF.printSchema()
+  jsnDF.show(false)
+//  rsDF.show(false)
 
   spark.close()
 }
